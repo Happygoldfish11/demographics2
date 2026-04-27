@@ -545,15 +545,21 @@ with tab_batch:
                 progress = st.progress(0.0, "Processing…")
                 results = []
                 for i, rec in enumerate(records):
-                    results.append(
-                        estimate(
-                            first_name=rec.get("first_name"),
-                            surname=rec.get("surname"),
-                            address=rec.get("address"),
-                            employer=rec.get("employer"),
-                            skip_geocoding=skip_geocoding,
-                        )
-                    )
+                   def clean_cell(value):
+    if pd.isna(value):
+        return None
+    return str(value).strip()
+
+
+results.append(
+    estimate(
+        first_name=clean_cell(rec.get("first_name")),
+        surname=clean_cell(rec.get("surname")),
+        address=clean_cell(rec.get("address")),
+        employer=clean_cell(rec.get("employer")),
+        skip_geocoding=skip_geocoding,
+    )
+)
                     progress.progress(
                         (i + 1) / len(records),
                         f"Processed {i+1}/{len(records)}",
