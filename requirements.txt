@@ -1,0 +1,20 @@
+# Runtime dependencies for the BISG / BIFSG estimator
+#
+# numpy / pandas — array & dataframe core
+# requests       — Census Geocoder API client
+# surgeo         — provides the bundled Census 2010 surname file, Tzioumis
+#                  (2018) first-name file, and ZCTA × race table that we
+#                  use as reference data. We do NOT use surgeo's
+#                  estimation methods at runtime; we re-implement BIFSG
+#                  from first principles and cross-validate against
+#                  surgeo in the test suite.
+# streamlit      — UI
+# plotly         — charts in the UI
+# pytest         — test runner
+numpy>=1.24
+pandas>=2.0
+requests>=2.31
+surgeo>=1.1.0
+streamlit>=1.30
+plotly>=5.18
+pytest>=7.4
